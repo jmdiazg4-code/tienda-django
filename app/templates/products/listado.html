@@ -1,0 +1,47 @@
+{% extends "layouts/tienda.html" %}
+{% block title %}Tienda
+{% endblock  %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<div class="row">
+		<div class="col-9">
+			<div class="row">
+				{% for product in products %}
+					<div class="col-md-3 col-sm-12 col-lg-4">
+						<div class="card" style="width: 100%">
+							<img src="{{ product.imagen.url }}" style="width:100%;" class="card-img-top" alt="{{product.name}}">
+							<div class="card-body">
+								<h5 class="card-title"> {{product.name }}</h5>
+								<p class="card-text">{{ product.detail}}</p>
+								<p class="card-text">{{ product.price}} COP</p>
+								<p class="card-text">{{ product.id}} </p>
+
+							</div>
+							<div class="card-footer text-center">
+								<form action="{% url 'comprarArticulo' product.id %}" method="POST" class="mt-2" autocomplete="off">
+									{% csrf_token %}								
+									{{ formu|crispy }}								
+	                				<a href="{% url 'comprarArticulo' product.id %}" class="btn btn-success" >Comprar</a>
+	                			</form>
+	                			
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+		<div class="col-3">
+			<div class="card" style="width: 100%">
+				<form method="POST" class="mt-2" autocomplete="off">
+					<img src="{{ products.imagen.url }}" style="width:100%;" class="card-img-top" >
+						{% csrf_token %}
+						
+				</form>
+			</div>
+		</div>
+			{% comment %}
+				Aqui va el widget de  el carrrito de compras
+			{% endcomment %}	
+	</div>	
+{% endblock  %}

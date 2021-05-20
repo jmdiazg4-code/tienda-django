@@ -1,0 +1,33 @@
+{% extends "layouts/tienda.html" %}
+{% block title %}-d
+{% endblock  %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<div class="row">
+        <div class="col-6">
+    		<form method="POST" class="mt-4" autocomplete="off">
+    			{% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-success">Proceder a la compra</button>
+            </form>                
+        </div>  
+    	<div class="col-6">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="card" style="width: 100%">
+                        
+                        <div class="card-body">
+                            <div class="card-body">
+                            <p class="card-text"> debe aparecer {{usuario.idproduct}} </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+		
+{% endblock  %}
+
+

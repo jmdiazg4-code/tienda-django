@@ -1,0 +1,60 @@
+{% extends "layouts/tienda.html" %}
+{% block title %}-Compra
+{% endblock  %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+	<div class="row">
+        <div class="col-6">
+    		<form name="formDatos" method="POST" class="mt-2" autocomplete="off">
+    			{% csrf_token %}
+                {{ form77|crispy }}
+                <button type="submit" class="btn btn-success">Guardar</button>
+                
+                {% if objeto.name %}
+                    <a href="https://test.placetopay.com/redirection/api/session/" class="btn btn-success" >Finalizar Compra</a>
+
+                {% endif %}  
+            </form>
+               
+        </div>  
+    		
+        <div class="col-6">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card" style="width: 100%">
+                        <h4><div class="card-header">
+                        Orden de Compra
+                        </div></h4>
+                        <div class="card mb-3" style="max-width: 540px;">
+                          <div class="row g-0">
+                            <div class="col-md-4">
+                              <img src="{{ objeto.imagen.url }}" style="width:100%;" class="card-img-top" alt="{{objeto.name}}">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h5 class="card-title">Datos del producto</h5>
+                                <p class="card-text">{{objeto.name}}.</p>
+                                <p class="card-text">{{objeto.price}} COP</p>
+                                <p class="card-text">{{usuario.status}}</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>  
+                        <div class="card-body">
+                            <h5>Datos del comprador  <span class="badge bg-secondary">New</span></h5>
+                            <div class="h5">Nombre:</div><p>{{usuario.customer_name}}</p>
+                            <div  class="h5">E-mail:</div><p>{{usuario.customer_email}}</p>
+                            <div  class="h5">Teléfono: </div><p>{{usuario.customer_mobile}}</p>
+
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+        </div>
+    </div>
+		
+{% endblock  %}
+
+
